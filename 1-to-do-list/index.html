@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>To Do List</title>
+  </head>
+  <body>
+    <section>
+      <h1>Gerencie suas tarefas</h1>
+
+      <p>
+        Crie, modifique e remova as suas tarefas. Fique a vontade para filtrar
+        suas atividades entre concluídas e pendentes. Para iniciar, adicione uma
+        atividade clicando no botão agora mesmo!
+      </p>
+
+      <div class="itens-actions">
+        <fieldset class="options">
+          <legend>Filtre suas tarefas:</legend>
+          <div class="options-item">
+            <input type="radio" id="opened" name="options" value="opened" />
+            <label form="opened">Abertas</label>
+          </div>
+
+          <div class="options-item">
+            <input type="radio" id="closed" name="options" value="closed" />
+            <label form="closed">Concluídas</label>
+          </div>
+        </fieldset>
+
+        <button type="button">Adicionar item</button>
+      </div>
+    </section>
+
+    <section id="itens"></section>
+  </body>
+</html>
