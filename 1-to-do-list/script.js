@@ -51,6 +51,9 @@ const itens = [
   },
 ];
 
+const cardContainer = document.querySelector("#cards");
+const addButton = document.querySelector(".new-item-button");
+
 const renderCardItem = (item) => {
   return `<div class="card" id="card-${item.id}">
         <h5>${item.description}</h5>
@@ -64,10 +67,10 @@ const renderCardItem = (item) => {
             }>Concluído</option>
           </select>
           <div class="card-buttons">
-            <button>
+            <button type="button" onclick="handleEdit(${item.id})">
               <span class="material-symbols-outlined"> edit </span>
             </button>
-            <button>
+            <button onclick="handleDelete(${item.id})">
               <span class="material-symbols-outlined"> delete </span>
             </button>
           </div>
@@ -77,22 +80,19 @@ const renderCardItem = (item) => {
 
 const initialData = () => {
   const render = itens.map((item) => renderCardItem(item)).join(" ");
-  const cardContainer = document.querySelector("#cards");
-
-  cardContainer.innerHTML += render;
+  cardContainer.innerHTML = render;
 };
 
 const handleInput = (event) => {
   const input = event.target;
-  const button = document.querySelector(".new-item-button");
   if (input.value.trim() === "") {
-    button.disabled = true;
+    addButton.disabled = true;
   } else {
-    button.disabled = false;
+    addButton.disabled = false;
   }
 };
 
-function handleSubmit(event) {
+const handleSubmit = (event) => {
   event.preventDefault();
   const input = document.querySelector(".new-item-input");
   if (input.value.trim() !== "") {
@@ -105,13 +105,18 @@ function handleSubmit(event) {
     input.value = "";
 
     const cardHtml = renderCardItem(item);
-    const cardContainer = document.querySelector("#cards");
-
     cardContainer.innerHTML = cardHtml + cardContainer.innerHTML;
 
-    const button = document.querySelector(".new-item-button");
-    button.disabled = true;
+    addButton.disabled = true;
   }
-}
+};
+
+const handleDelete = (id) => {
+  const index = itens.indexOf(id);
+  if (index !== -1) itens.splice(index, 1);
+
+  const cardToRemove = document.getElementById(`card-${id}`);
+  if (cardToRemove) cardToRemove.remove();
+};
 
 initialData();
