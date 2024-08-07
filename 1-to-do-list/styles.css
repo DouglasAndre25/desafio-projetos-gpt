@@ -101,7 +101,8 @@ input[type="radio"]:checked::before {
   margin: 0 16px;
 }
 
-.card-buttons > button {
+.card-buttons > button,
+.edit-item > button {
   border: none;
 }
 
@@ -111,13 +112,15 @@ input[type="radio"]:checked::before {
 }
 
 select,
-.new-item-input {
+.new-item-input,
+.edit-item-input {
   background: none;
   border: 1px solid #ffffff;
   padding: 8px;
   margin-top: 8px;
   color: #ffffff;
   border-radius: 16px;
+  display: inherit;
 }
 
 select option {
@@ -136,4 +139,18 @@ input::placeholder {
 button:disabled {
   background-color: #ffffff;
   color: #121212;
+}
+
+.edit-item-input {
+  margin: 16px;
+  width: -webkit-fill-available;
+}
+
+.edit-item {
+  display: flex;
+  gap: 12px;
+}
+
+.edit-item-button:disabled {
+  display: none;
 }

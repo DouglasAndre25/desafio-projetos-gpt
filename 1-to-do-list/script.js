@@ -78,17 +78,50 @@ const renderCardItem = (item) => {
       </div>`;
 };
 
+const renderEditCardItem = (item) => {
+  return `
+        <form class="edit-item" onsubmit="handleEditSubmit(event, ${item.id})">
+            <input class="edit-item-input" value="${
+              item.description
+            }" oninput="handleInput(event, ${item.id})"/>
+            <button type="submit" class="edit-item-button">
+                <span class="material-symbols-outlined">check</span>
+            </button>
+        </form>
+        <div class="card-actions">
+           <select>
+            <option value="opened" ${
+              item.status === "opened" ? "selected" : ""
+            }>Em andamento</option>
+            <option value="closed" ${
+              item.status === "closed" ? "selected" : ""
+            }>Concluído</option>
+          </select>
+          <div class="card-buttons">
+            <button onclick="handleDelete(${item.id})">
+              <span class="material-symbols-outlined"> delete </span>
+            </button>
+          </div>
+        </div>
+    `;
+};
+
 const initialData = () => {
   const render = itens.map((item) => renderCardItem(item)).join(" ");
   cardContainer.innerHTML = render;
 };
 
-const handleInput = (event) => {
+const handleInput = (event, id) => {
+  const editButton = document.querySelector(
+    `div#card-${id} > form > .edit-item-button`
+  );
+  const targetButton = id ? editButton : addButton;
   const input = event.target;
+
   if (input.value.trim() === "") {
-    addButton.disabled = true;
+    targetButton.disabled = true;
   } else {
-    addButton.disabled = false;
+    targetButton.disabled = false;
   }
 };
 
@@ -111,12 +144,39 @@ const handleSubmit = (event) => {
   }
 };
 
+const handleEditSubmit = (event, id) => {
+  event.preventDefault();
+  const cardToEdit = document.getElementById(`card-${id}`);
+  const input = document.querySelector(
+    `div#card-${id} > form > .edit-item-input`
+  );
+  const item = itens.find((i) => String(i.id) === String(id));
+  const newItem = {
+    ...item,
+    description: input.value.trim(),
+  };
+
+  const index = itens.indexOf(item);
+  itens[index] = newItem;
+
+  cardToEdit.outerHTML = renderCardItem(newItem);
+};
+
 const handleDelete = (id) => {
   const index = itens.indexOf(id);
   if (index !== -1) itens.splice(index, 1);
 
   const cardToRemove = document.getElementById(`card-${id}`);
   if (cardToRemove) cardToRemove.remove();
+};
+
+const handleEdit = (id) => {
+  const cardToEdit = document.getElementById(`card-${id}`);
+  cardToEdit.innerHTML = renderEditCardItem({
+    id,
+    description: cardToEdit.querySelector("h5").textContent,
+    status: cardToEdit.querySelector("select").value,
+  });
 };
 
 initialData();
