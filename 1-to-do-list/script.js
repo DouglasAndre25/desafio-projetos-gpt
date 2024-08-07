@@ -189,7 +189,6 @@ const handleSelectChange = (event, id) => {
 
   const index = itens.indexOf(item);
   itens[index] = newItem;
-  console.log(itens);
 };
 
 initialData();
