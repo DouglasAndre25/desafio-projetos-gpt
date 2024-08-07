@@ -58,7 +58,7 @@ const renderCardItem = (item) => {
   return `<div class="card" id="card-${item.id}">
         <h5>${item.description}</h5>
         <div class="card-actions">
-          <select>
+          <select onchange="handleSelectChange(event, ${item.id})">
             <option value="opened" ${
               item.status === "opened" ? "selected" : ""
             }>Em andamento</option>
@@ -89,7 +89,7 @@ const renderEditCardItem = (item) => {
             </button>
         </form>
         <div class="card-actions">
-           <select>
+           <select onchange="handleSelectChange(event, ${item.id})">
             <option value="opened" ${
               item.status === "opened" ? "selected" : ""
             }>Em andamento</option>
@@ -177,6 +177,19 @@ const handleEdit = (id) => {
     description: cardToEdit.querySelector("h5").textContent,
     status: cardToEdit.querySelector("select").value,
   });
+};
+
+const handleSelectChange = (event, id) => {
+  const input = event.target.value;
+  const item = itens.find((i) => String(i.id) === String(id));
+  const newItem = {
+    ...item,
+    status: input,
+  };
+
+  const index = itens.indexOf(item);
+  itens[index] = newItem;
+  console.log(itens);
 };
 
 initialData();
