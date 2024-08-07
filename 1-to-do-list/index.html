@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
     <link rel="stylesheet" href="styles.css" />
     <title>To Do List</title>
   </head>
@@ -20,20 +24,36 @@
         <fieldset class="options">
           <legend>Filtre suas tarefas:</legend>
           <div class="options-item">
+            <input type="radio" id="none" name="options" value="none" checked />
+            <label for="none">Nenhum</label>
+          </div>
+
+          <div class="options-item">
             <input type="radio" id="opened" name="options" value="opened" />
-            <label form="opened">Abertas</label>
+            <label for="opened">Abertas</label>
           </div>
 
           <div class="options-item">
             <input type="radio" id="closed" name="options" value="closed" />
-            <label form="closed">Concluídas</label>
+            <label for="closed">Concluídas</label>
           </div>
         </fieldset>
 
-        <button type="button">Adicionar item</button>
+        <form class="new-item-form" onsubmit="handleSubmit(event)">
+          <input
+            class="new-item-input"
+            placeholder="Insira uma nova atividade"
+            oninput="handleInput(event)"
+          />
+          <button type="submit" disabled class="new-item-button">
+            Adicionar item
+          </button>
+        </form>
       </div>
     </section>
 
-    <section id="itens"></section>
+    <section id="cards"></section>
+
+    <script src="script.js"></script>
   </body>
 </html>

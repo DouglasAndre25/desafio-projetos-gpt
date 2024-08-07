@@ -23,12 +23,20 @@ button {
   background-color: transparent;
   border: 1px solid #ffffff;
   margin-top: 12px;
+  border-radius: 16px;
 }
 
-p {
+p,
+h5 {
   padding: 20px;
   margin-bottom: 8px;
   text-align: justify;
+}
+
+h5 {
+  font-size: 20px;
+  text-align: start;
+  font-weight: initial;
 }
 
 input[type="radio"] {
@@ -64,6 +72,7 @@ input[type="radio"]:checked::before {
 .options {
   display: flex;
   gap: 24px;
+  border-radius: 16px;
 }
 
 .itens-actions {
@@ -77,4 +86,54 @@ input[type="radio"]:checked::before {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.card {
+  border: 1px solid #ffffff;
+  margin: 24px 24px 0 24px;
+  border-radius: 16px;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 16px;
+}
+
+.card-buttons > button {
+  border: none;
+}
+
+.new-item-form {
+  display: flex;
+  justify-content: space-around;
+}
+
+select,
+.new-item-input {
+  background: none;
+  border: 1px solid #ffffff;
+  padding: 8px;
+  margin-top: 8px;
+  color: #ffffff;
+  border-radius: 16px;
+}
+
+select option {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+select:focus {
+  outline: none;
+}
+
+input::placeholder {
+  color: #ffffff77;
+}
+
+button:disabled {
+  background-color: #ffffff;
+  color: #121212;
 }
