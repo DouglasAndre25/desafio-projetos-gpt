@@ -109,6 +109,11 @@ input[type="radio"]:checked::before {
 .new-item-form {
   display: flex;
   justify-content: space-around;
+  gap: 40px;
+}
+
+.new-item-input {
+  width: -webkit-fill-available;
 }
 
 select,
