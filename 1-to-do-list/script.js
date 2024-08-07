@@ -1,58 +1,8 @@
-const itens = [
-  {
-    id: 1,
-    description: "Estudar para a prova de algoritmos 3",
-    status: "closed",
-  },
-  {
-    id: 2,
-    description: "Completar o projeto de desenvolvimento web",
-    status: "opened",
-  },
-  {
-    id: 3,
-    description: "Ler o capítulo 4 do livro de ciência de dados",
-    status: "closed",
-  },
-  {
-    id: 4,
-    description: "Participar da reunião do grupo de estudo",
-    status: "opened",
-  },
-  {
-    id: 5,
-    description: "Fazer os exercícios de cálculo 2",
-    status: "closed",
-  },
-  {
-    id: 6,
-    description: "Revisar as notas da aula de física quântica",
-    status: "opened",
-  },
-  {
-    id: 7,
-    description: "Escrever o relatório de laboratório de química",
-    status: "closed",
-  },
-  {
-    id: 8,
-    description: "Assistir a palestra sobre inteligência artificial",
-    status: "opened",
-  },
-  {
-    id: 9,
-    description: "Preparar a apresentação do seminário de história",
-    status: "closed",
-  },
-  {
-    id: 10,
-    description: "Praticar problemas de programação competitiva",
-    status: "opened",
-  },
-];
+const itens = [];
 
 const cardContainer = document.querySelector("#cards");
 const addButton = document.querySelector(".new-item-button");
+const filterRadioOptions = document.querySelectorAll(".options-item > input");
 
 const renderCardItem = (item) => {
   return `<div class="card" id="card-${item.id}">
@@ -106,8 +56,9 @@ const renderEditCardItem = (item) => {
     `;
 };
 
-const initialData = () => {
-  const render = itens.map((item) => renderCardItem(item)).join(" ");
+const initialData = (data) => {
+  const tasks = data ?? itens;
+  const render = tasks.map((item) => renderCardItem(item)).join(" ");
   cardContainer.innerHTML = render;
 };
 
@@ -191,4 +142,17 @@ const handleSelectChange = (event, id) => {
   itens[index] = newItem;
 };
 
+const handleFilterChange = (value) => {
+  if (value !== "none") {
+    const data = itens.filter((item) => item.status === value);
+    initialData(data);
+  } else {
+    initialData();
+  }
+};
+
 initialData();
+
+filterRadioOptions.forEach((radio) =>
+  radio.addEventListener("change", () => handleFilterChange(radio.value))
+);
